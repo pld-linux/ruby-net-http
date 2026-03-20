@@ -7,7 +7,7 @@
 Summary:	HTTP client library
 Name:		ruby-%{pkgname}
 Version:	0.6.0
-Release:	3
+Release:	4
 License:	Ruby or BSD
 Source0:	https://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	7396f405aa0c32a64aeaa3eb321d1ee1
@@ -51,9 +51,9 @@ Dokumentacja w formacie ri dla modułu języka Ruby %{pkgname}.
 %build
 # write .gemspec
 %__gem_helper spec
-%{__sed} -i -e "s/^\(  s\.version = \).*/\1\"%{version}\"/" %{pkgname}-%{version}.gemspec
 
 %if %{with doc}
+
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
 rm ri/created.rid
