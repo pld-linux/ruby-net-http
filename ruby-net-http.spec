@@ -7,7 +7,7 @@
 Summary:	HTTP client library
 Name:		ruby-%{pkgname}
 Version:	0.6.0
-Release:	1
+Release:	2
 License:	Ruby or BSD
 Source0:	https://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	7396f405aa0c32a64aeaa3eb321d1ee1
@@ -51,6 +51,7 @@ Dokumentacja w formacie ri dla modułu języka Ruby %{pkgname}.
 %build
 # write .gemspec
 %__gem_helper spec
+%{__sed} -i -e "s/s.version = .*/s.version = \"%{version}\"/" %{pkgname}-%{version}.gemspec
 
 %if %{with doc}
 rdoc --ri --op ri lib
@@ -63,7 +64,7 @@ rm ri/cache.ri
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
-cp -p %{pkgname}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 
 %if %{with doc}
 install -d $RPM_BUILD_ROOT{%{ruby_rdocdir}/%{name}-%{version},%{ruby_ridir}}
@@ -80,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_vendorlibdir}/net/http.rb
 %{ruby_vendorlibdir}/net/http
 %{ruby_vendorlibdir}/net/https.rb
-%{ruby_specdir}/%{pkgname}.gemspec
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %if %{with doc}
 %files rdoc
